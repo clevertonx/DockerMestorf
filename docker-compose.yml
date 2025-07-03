@@ -1,0 +1,15 @@
+services:
+  api:
+    # Constrói a imagem a partir do Dockerfile no diretório atual (.)
+    build: .
+    container_name: api
+    # Mapeia a porta 8000 do host para a porta 8000 do contêiner
+    ports:
+      - "8000:8000"
+    # Monta o diretório atual no diretório /app do contêiner
+    # Isso permite o hot-reload e a persistência do banco de dados SQLite (escola.db)
+    volumes:
+      - .:/app
+    # Comando para iniciar a aplicação com uvicorn, habilitando o acesso externo e o reload automático
+    command: uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+
